@@ -4,7 +4,7 @@ SparsityBoost
 Coming soon: Bookmark this page for...
 
 
-This repository will hold the code associated to the paper
+A repository holding the code implementing the methods of 
 
 
 "SparsityBoost: A New Scoring Function for Learning Bayesian
