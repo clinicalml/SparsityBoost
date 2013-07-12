@@ -1,7 +1,8 @@
 SparsityBoost
 =============
 
-[Coming soon!]
+Coming soon: Bookmark this page for...
+
 
 This repository will hold the code associated to the paper
 
