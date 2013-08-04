@@ -62,7 +62,7 @@ for($exp=0; $exp<=9; $exp++) {
 
 		# Create settings file
 		`cp gobnilp.set $outputdir_full/gobnilp$N.set`;
-		`sed -i '' 's|%DIR|$outputdir_full|' $outputdir_full/gobnilp$N.set`;  #TODO: determine meaning of '' here
+		`sed -i '' 's|%DIR|$outputdir_full|' $outputdir_full/gobnilp$N.set`;  #in-place editing: '' is the SUFFIX in -i[SUFFIX]
 		`sed -i '' 's/%N/$N/' $outputdir_full/gobnilp$N.set`;
 
 		# Run (note, need "gobnilp.set") in same directory
