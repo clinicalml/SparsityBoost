@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "options.h"
+#include <cstring>
 
 #define STRLEN 4096
 

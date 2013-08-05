@@ -1,5 +1,6 @@
 #include "model.h"
 #include <cstring>
+#include <algorithm>
 //#include <Python.h>
 #include <vector>
 #define LEN 4096

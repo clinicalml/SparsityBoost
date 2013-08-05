@@ -5,6 +5,7 @@
 #include "binSearchObj.h"
 #include "pwl_interp_2d.h"
 #include <vector>
+#include <algorithm>
 
 class LgBetaTable;
 class LgBetaTable {

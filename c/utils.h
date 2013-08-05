@@ -8,6 +8,7 @@
 #include <cmath>
 #include <ctime>
 #include <cassert>
+#include <cstdlib>
 
 using namespace std;
 
