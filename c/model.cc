@@ -280,27 +280,28 @@ void model::learn_model(options &opt) {
 
 	  // NOTE: if eta does not agree with the filename, will get bogus results. Have sanity check!
 	  //PyTuple_SetItem(pArgs, 0, PyFloat_FromDouble(eta));
+	  string infilePath = "../interpolationData/";
 	  string infileBase;
 	  if(eta == .04) {
-		  infileBase = "etaFourHundredths"; 
+		  infileBase = infilePath + "etaFourHundredths"; 
 		  //PyTuple_SetItem(pArgs, 1, PyString_FromString("/Users/eliotpbrenner/Documents/sontag/monteCarloBeta/test/etaFourHundredthsAdaptiveScalingLargeIncludingLargeGamma"));
 	  }
 	  else if(eta == .02) {
-		infileBase = "etaTwoHundredths"; 
+		infileBase = infilePath + "etaTwoHundredths"; 
 	    //PyTuple_SetItem(pArgs, 1, PyString_FromString("/Users/eliotpbrenner/Documents/sontag/monteCarloBeta/test/etaTwoHundredthsAdaptiveScalingLargeIncludingLargeGamma"));
 	  }
 	  else if(eta == .01) {
-		infileBase = "etaOneHundredth"; 
+		infileBase = infilePath + "etaOneHundredth"; 
 	    //PyTuple_SetItem(pArgs, 1, PyString_FromString("/Users/eliotpbrenner/Documents/sontag/monteCarloBeta/test/etaOneHundredthAdaptiveScalingLargeIncludingLargeGamma"));
 	  }
 	  else if(eta == .005) {
-		infileBase = "etaFiveThousandths"; 
+		infileBase = infilePath + "etaFiveThousandths"; 
 	    //PyTuple_SetItem(pArgs, 1, PyString_FromString("/Users/eliotpbrenner/Documents/sontag/monteCarloBeta/test/etaFiveThousandthsAdaptiveScalingLargeIncludingLargeGamma"));
 	  }
-	  //else if(eta == .001) {
-	//	infileBase = "etaOneThousandth"; 
+	  else if(eta == .001) {
+		infileBase = infilePath + "etaOneThousandth"; 
 	//    PyTuple_SetItem(pArgs, 1, PyString_FromString("/Users/eliotpbrenner/Documents/sontag/monteCarloBeta/test/etaOneThousandthAdaptiveScalingLargeIncludingLargeGamma"));
-	  //}
+	  }
 	  else {
 	    cout << "Invalid setting of eta." << endl;
 	    return;

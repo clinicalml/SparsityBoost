@@ -49,9 +49,9 @@ for($exp=0; $exp<=9; $exp++) {
 		$start_time = time;
 		#    `./c2/bscore -bic -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file`;
 		#    #    `./c2/bscore -alpha 10 -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file`;
-		`./c2/bscore -bic -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file -edge_scores .005`;
+		`../c/bscore -bic -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file -edge_scores .005`;
 		#    `./c2/bscore -bic -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file -edge_scores .005`;
-		print "./c2/bscore -bic -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file -edge_scores .02\n";
+		print "../c/bscore -bic -nodes 37 -maxpa 4 -data $data_file -mod_out $model_file -edge_scores .005\n";
 		print " ";
 
 		$end_time = time;

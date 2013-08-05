@@ -1,6 +1,18 @@
 SparsityBoost
 =============
 
+Dependencies:
+
+Gobnilp1.3 and its dependency Scip
+
+In order to run perl/run_experiments.pl you have to have 
+
+gobnilp1.3/bin/gobnilp
+
+under the perl directory.
+
+In ther perl directory itself, you have to have ../perl/gobnilp.set
+
 Coming soon: Bookmark this page for...
 
 
