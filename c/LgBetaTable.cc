@@ -81,13 +81,14 @@ int readCSV(const string &CSVInfile, vector<std::vector<double> > &dataVector, v
   data_t data;
 
   // Here is the file containing the data. Read it into data.
+     
   ifstream infile(CSVInfile.c_str()); 
   infile >> data;
 
   // Complain if something went wrong.
   if (!infile.eof())
     {
-    cout << "Read CSV Error!" << endl;
+    cout << "Read CSV Error " << CSVInfile << "!" << endl;
     return 1;
     }
 
