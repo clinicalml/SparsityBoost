@@ -1,0 +1,150 @@
+GOBNILP version 1.4.0 [GitHash: 4a62cad ]
+Solving the BN structure learning problem using SCIP.
+
+SCIP version 3.0.1 [precision: 8 byte] [memory: block] [mode: optimized] [LP solver: SoPlex 1.7.1] [GitHash: 9ee94b7]
+Copyright (c) 2002-2013 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+reading parameter file <../results/experiments/0/sparsity_eps005/gobnilp4400.set>
+START Parameters not at default value
+nodeselection/childsel = u
+presolving/maxrestarts = 0
+separating/efficacynorm = d
+separating/maxstallrounds = 50
+separating/maxcutsroot = 2000000
+separating/poolfreq = 1
+timing/clocktype = 2
+heuristics/coefdiving/freq = -1
+heuristics/crossover/freq = -1
+heuristics/feaspump/freq = -1
+heuristics/fracdiving/freq = -1
+heuristics/guideddiving/freq = -1
+heuristics/linesearchdiving/freq = -1
+heuristics/nlpdiving/freq = -1
+heuristics/objpscostdiving/freq = -1
+heuristics/pscostdiving/freq = -1
+heuristics/rens/freq = -1
+heuristics/rootsoldiving/freq = -1
+heuristics/shiftandpropagate/freq = 1
+heuristics/subnlp/freq = -1
+heuristics/undercover/freq = -1
+heuristics/veclendiving/freq = -1
+separating/clique/freq = -1
+separating/closecuts/freq = 0
+separating/closecuts/separelint = FALSE
+separating/flowcover/freq = -1
+separating/gomory/maxbounddist = 1
+separating/gomory/maxrounds = -1
+separating/gomory/maxroundsroot = -1
+separating/gomory/maxweightrange = 1.79769313486232e+308
+separating/impliedbounds/freq = -1
+separating/mcf/freq = -1
+separating/oddcycle/freq = 0
+separating/zerohalf/freq = 0
+separating/zerohalf/maxbounddist = 1
+separating/zerohalf/maxrounds = -1
+separating/zerohalf/maxroundsroot = -1
+separating/zerohalf/maxtestdelta = -1
+separating/zerohalf/separating/minviolation = 0.001
+display/lpavgiterations/active = 0
+display/depth/active = 2
+display/vars/active = 0
+display/poolsize/active = 2
+END Parameters not at default value
+
+Input file format not recognised - assuming it is Jaakkola.
+File name:		../results/experiments/0/sparsity_eps005/model4400.mod
+Problem name:		model4400
+Number of variables: 37
+Number of candidate parent sets: 1129
+File reading successful
+
+presolving:
+(round 1) 0 del vars, 18 del conss, 0 add conss, 0 chg bounds, 18 chg sides, 0 chg coeffs, 0 upgd conss, 14 impls, 231 clqs
+(round 2) 0 del vars, 18 del conss, 0 add conss, 0 chg bounds, 18 chg sides, 0 chg coeffs, 184 upgd conss, 14 impls, 231 clqs
+   (0.1s) probing: 51/1129 (4.5%) - 0 fixings, 0 aggregations, 0 implications, 0 bound changes
+   (0.1s) probing aborted: 50/50 successive totally useless probings
+presolving (3 rounds):
+ 0 deleted vars, 18 deleted constraints, 0 added constraints, 0 tightened bounds, 0 added holes, 18 changed sides, 0 changed coefficients
+ 14 implications, 232 cliques
+presolved problem has 1129 variables (1129 bin, 0 int, 0 impl, 0 cont) and 223 constraints
+      1 constraints of type <metadata>
+      1 constraints of type <dagcluster>
+    221 constraints of type <setppc>
+Presolving Time: 0.08
+
+ time | node  | left  |LP iter| mem |depth|mdpt |frac |cons |cols |rows |cuts |pool |confs|strbr|  dualbound   | primalbound  |  gap   
+T 0.1s|     1 |     0 |     0 |2869k|  39 |   0 |   - | 223 |1129 | 221 |   0 |   0 |   0 |   0 |      --      |-1.118503e+05 |    Inf 
+  0.1s|     1 |     0 |   156 |2854k|   0 |   0 |   6 | 223 |1129 | 221 |   0 |   0 |   0 |   0 |-9.372442e+04 |-1.118503e+05 |  19.34%
+k 0.1s|     1 |     0 |   156 |2892k|   0 |   0 |   6 | 223 |1129 | 221 |   0 |   0 |   0 |   0 |-9.372442e+04 |-9.552009e+04 |   1.92%
+  0.3s|     1 |     0 |   333 |3048k|   0 |   0 |  26 | 223 |1129 | 275 |  54 |   6 |   0 |   0 |-9.514392e+04 |-9.552009e+04 |   0.40%
+  0.4s|     1 |     0 |   373 |3122k|   0 |   0 |  26 | 223 |1129 | 290 |  69 |  21 |   0 |   0 |-9.518631e+04 |-9.552009e+04 |   0.35%
+  0.6s|     1 |     0 |   425 |3424k|   0 |   0 |  39 | 223 |1129 | 301 |  80 |  49 |   0 |   0 |-9.520614e+04 |-9.552009e+04 |   0.33%
+  1.0s|     1 |     0 |   492 |3914k|   0 |   0 |  31 | 223 |1129 | 315 |  94 |  97 |   0 |   0 |-9.526277e+04 |-9.552009e+04 |   0.27%
+k 1.0s|     1 |     0 |   492 |3951k|   0 |   0 |  31 | 223 |1129 | 315 |  94 |  97 |   0 |   0 |-9.526277e+04 |-9.537651e+04 |   0.12%
+  1.4s|     1 |     0 |   562 |4544k|   0 |   0 |  53 | 223 |1129 | 320 |  99 | 139 |   0 |   0 |-9.527772e+04 |-9.537651e+04 |   0.10%
+  1.4s|     1 |     0 |   562 |4554k|   0 |   0 |  53 | 223 |1129 | 320 |  99 | 139 |   0 |   0 |-9.527772e+04 |-9.537651e+04 |   0.10%
+  2.5s|     1 |     0 |   660 |6605k|   0 |   0 |  32 | 223 |1129 | 328 | 107 | 217 |   0 |   0 |-9.529267e+04 |-9.537651e+04 |   0.09%
+  2.5s|     1 |     0 |   660 |6614k|   0 |   0 |  32 | 223 |1129 | 328 | 107 | 217 |   0 |   0 |-9.529267e+04 |-9.537651e+04 |   0.09%
+  3.6s|     1 |     0 |   740 |8158k|   0 |   0 |  43 | 223 |1129 | 331 | 110 | 275 |   0 |   0 |-9.530122e+04 |-9.537651e+04 |   0.08%
+  3.6s|     1 |     0 |   740 |8194k|   0 |   0 |  43 | 223 |1129 | 331 | 110 | 275 |   0 |   0 |-9.530122e+04 |-9.537651e+04 |   0.08%
+  4.7s|     1 |     0 |   813 |9451k|   0 |   0 |  49 | 223 |1129 | 335 | 114 | 333 |   0 |   0 |-9.530775e+04 |-9.537651e+04 |   0.07%
+ time | node  | left  |LP iter| mem |depth|mdpt |frac |cons |cols |rows |cuts |pool |confs|strbr|  dualbound   | primalbound  |  gap   
+  4.7s|     1 |     0 |   813 |9460k|   0 |   0 |  49 | 223 |1129 | 335 | 114 | 333 |   0 |   0 |-9.530775e+04 |-9.537651e+04 |   0.07%
+  5.9s|     1 |     0 |   899 |  10M|   0 |   0 |  41 | 223 |1129 | 342 | 121 | 352 |   0 |   0 |-9.531282e+04 |-9.537651e+04 |   0.07%
+k 5.9s|     1 |     0 |   899 |  10M|   0 |   0 |  41 | 223 |1129 | 342 | 121 | 352 |   0 |   0 |-9.531282e+04 |-9.536861e+04 |   0.06%
+  5.9s|     1 |     0 |   899 |  10M|   0 |   0 |  41 | 223 |1129 | 342 | 121 | 352 |   0 |   0 |-9.531282e+04 |-9.536861e+04 |   0.06%
+  5.9s|     1 |     0 |   899 |  10M|   0 |   0 |  41 | 223 |1129 | 342 | 121 | 352 |   0 |   0 |-9.531282e+04 |-9.536861e+04 |   0.06%
+  6.7s|     1 |     0 |   989 |  10M|   0 |   0 |  51 | 223 |1129 | 346 | 125 | 356 |   0 |   0 |-9.531841e+04 |-9.536861e+04 |   0.05%
+  6.7s|     1 |     0 |   989 |  10M|   0 |   0 |  51 | 223 |1129 | 346 | 125 | 356 |   0 |   0 |-9.531841e+04 |-9.536861e+04 |   0.05%
+  7.8s|     1 |     0 |  1068 |  10M|   0 |   0 |  49 | 223 |1129 | 337 | 131 | 364 |   0 |   0 |-9.532383e+04 |-9.536861e+04 |   0.05%
+  7.8s|     1 |     0 |  1068 |  10M|   0 |   0 |  49 | 223 |1129 | 336 | 131 | 364 |   0 |   0 |-9.532383e+04 |-9.536861e+04 |   0.05%
+  8.7s|     1 |     0 |  1092 |  10M|   0 |   0 |   0 | 222 |1129 | 341 | 136 | 370 |   0 |   0 |-9.532497e+04 |-9.536861e+04 |   0.05%
+k 8.7s|     1 |     0 |  1092 |  10M|   0 |   0 |   - | 222 |1129 | 341 | 136 | 370 |   0 |   0 |-9.532497e+04 |-9.532497e+04 |   0.00%
+  8.7s|     1 |     0 |  1092 |  10M|   0 |   0 |   - | 222 |1129 | 341 | 136 | 370 |   0 |   0 |-9.532497e+04 |-9.532497e+04 |   0.00%
+  8.7s|     1 |     0 |  1092 |  10M|   0 |   0 |   - | 222 |1129 | 341 | 136 | 370 |   0 |   0 |-9.532497e+04 |-9.532497e+04 |   0.00%
+
+SCIP Status        : problem is solved [optimal solution found]
+Solving Time (sec) : 8.72
+Solving Nodes      : 1
+Primal Bound       : -9.53249675292969e+04 (7 solutions)
+Dual Bound         : -9.53249675292969e+04
+Gap                : 0.00 %
+0<- -3053.453125
+1<- -2969.054688
+2<-0,1, -2714.655762
+3<-2, -2382.558350
+4<-2, -2651.894287
+5<-0, -2780.847412
+6<-0,1, -2393.106934
+7<- -3029.742188
+8<- -3041.046875
+9<- -2997.156250
+10<- -3012.453125
+11<- -3053.976562
+12<- -2970.242188
+13<-10, -2394.552490
+14<- -3053.976562
+15<- -2943.078125
+16<- -3036.378906
+17<- -3050.757812
+18<-17, -2551.253662
+19<-15,18, -2239.638184
+20<-11,12, -2323.032715
+21<-11,14,19, -2138.044189
+22<-12, -2368.351318
+23<-11,21, -2745.995850
+24<-23, -2440.812256
+25<-16,23, -1999.028809
+26<-20,25, -2399.392090
+27<-8,13,24,26, -2163.465820
+28<-11,21, -1724.040527
+29<-11,14,19, -1903.225830
+30<-27, -2791.034912
+31<-9,30, -2372.337402
+32<-21,24, -2618.339355
+33<-9,30, -2322.181152
+34<-7,30, -2095.452637
+35<-6,30, -2283.640137
+36<-13,35, -2316.769043
+BN score is -95324.967529
+

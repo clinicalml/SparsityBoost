@@ -215,14 +215,14 @@ double LgBetaTable::interpolateWithKL( int N, double KL, double gamma, double cu
 	  }
 	  double smallest_KL = KL_at_Pos.at(0);
 	  if (KL < smallest_KL) {
-		  cout << "KL less than smallest KL";
+		  //cout << "KL less than smallest KL";
 		  double nextSmallest_KL = KL_at_Pos.at(1); //assumes KL_at_Pos has length at least 2
 		  double first_LgBeta = lgBeta_at_Pos.at(0);
 		  double second_LgBeta = lgBeta_at_Pos.at(1);
 		  double * candidate = (gamma<eta)  ? &(second_LgBeta) : &(first_LgBeta);
 		  if (currSmallest < *candidate) //TODO: eliminate the debug output and put this and similar if's on one line
 		  {
-		  cout << "currSmallest " << currSmallest << " < " << *candidate << " , best candidate" << endl; 
+		  //cout << "currSmallest " << currSmallest << " < " << *candidate << " , best candidate" << endl; 
 		  return currSmallest;
 		  }
 		  return interpolate1d(smallest_KL, nextSmallest_KL,first_LgBeta,second_LgBeta,KL);
@@ -243,11 +243,11 @@ double LgBetaTable::interpolateWithKL( int N, double KL, double gamma, double cu
 	  double * candidate = (gamma<eta)  ? &(y1) : &(y0);
 	  if (currSmallest < *candidate) 
 	  {
-		  cout << "currSmallest " << currSmallest << " < " << *candidate << " , best candidate" << endl; 
+		  //cout << "currSmallest " << currSmallest << " < " << *candidate << " , best candidate" << endl; 
 		  return currSmallest;
 	  }
-	  cout << "currSmallest " << currSmallest << " > " << *candidate << ", best candidate" << endl; 
-	  cout << "1d Interpolation with " << " x0: " << x0 <<" x1: " << x1 << " y0: " << y0 <<" y1: " << y1  <<" x: " << x << endl;
+	  //cout << "currSmallest " << currSmallest << " > " << *candidate << ", best candidate" << endl; 
+	  //cout << "1d Interpolation with " << " x0: " << x0 <<" x1: " << x1 << " y0: " << y0 <<" y1: " << y1  <<" x: " << x << endl;
 	  return interpolate1d(x0,x1,y0,y1,x);
   
   }  //end of 1-d interpolation block to execute if given N is in list of tabulated N
@@ -292,16 +292,16 @@ double LgBetaTable::interpolateWithKL( int N, double KL, double gamma, double cu
 	  double * candidate = (gamma<eta)  ? &(LgBeta1_LgN) : &(LgBeta0_LgN);
 	  if (currSmallest < *candidate) 
 	  {
-		  cout << "currSmallest " << currSmallest << " < " << *candidate << " , best candidate" << endl; 
+		  //cout << "currSmallest " << currSmallest << " < " << *candidate << " , best candidate" << endl; 
 		  return currSmallest;
 	  }
-	  cout << "currSmallest " << currSmallest << " > " << *candidate << ", best candidate" << endl; 
+	  //cout << "currSmallest " << currSmallest << " > " << *candidate << ", best candidate" << endl; 
 	  int N_Sm = N_int->at(LgPos-1); //TODO: add exception if LgPos = 0
-	  cout << "Interpolating the data N = " << N << " KL " << KL << endl;
-	  cout << "Over the points  1     N = " << N_Sm << " KL " << KL0_SmN << " LgBeta " << LgBeta0_SmN << endl; 
-	  cout << "Over the points  2     N = " << N_Sm << " KL " << KL1_SmN << " LgBeta " << LgBeta1_SmN << endl; 
-	  cout << "Over the points  3     N = " << N_Lg << " KL " << KL0_LgN << " LgBeta " << LgBeta0_LgN << endl; 
-	  cout << "Over the points  4     N = " << N_Lg << " KL " << KL1_LgN << " LgBeta " << LgBeta1_LgN << endl; 
+	  //cout << "Interpolating the data N = " << N << " KL " << KL << endl;
+	  //cout << "Over the points  1     N = " << N_Sm << " KL " << KL0_SmN << " LgBeta " << LgBeta0_SmN << endl; 
+	  //cout << "Over the points  2     N = " << N_Sm << " KL " << KL1_SmN << " LgBeta " << LgBeta1_SmN << endl; 
+	  //cout << "Over the points  3     N = " << N_Lg << " KL " << KL0_LgN << " LgBeta " << LgBeta0_LgN << endl; 
+	  //cout << "Over the points  4     N = " << N_Lg << " KL " << KL1_LgN << " LgBeta " << LgBeta1_LgN << endl; 
 	  int nxd = 2; //number of x grid points
 	  int nyd = 2; //  ...     y ...
 	  int ni = 1; //number of interpolant points

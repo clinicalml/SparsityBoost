@@ -23,10 +23,14 @@ for($exp=0; $exp<=9; $exp++) {
 	$datadir_full = $datadir . $exp . "/";
 	$outputdir_partial = $outputdir . $exp;
 	$outputdir_full = $outputdir . $exp . "/" . $method;
+	if(!(-d $outputdir)) {
+		mkdir($outputdir);
+	}
 	if(!(-d $outputdir_partial)) {
 		mkdir($outputdir_partial);
 	}
 	if(!(-d $outputdir_full)) {
+                print "mkdir($outputdir_full)";
 		mkdir($outputdir_full);
 	}
 
