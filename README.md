@@ -1,19 +1,6 @@
 SparsityBoost
 =============
 
-Dependencies:
-
-Gobnilp1.3 and its dependency Scip
-
-In order to run perl/run_experiments.pl you have to have 
-
-gobnilp1.3/bin/gobnilp
-
-under the perl directory.
-
-In ther perl directory itself, you have to have ../perl/gobnilp.set
-
-Coming soon: Bookmark this page for...
 
 
 A repository holding the code implementing the methods of 
@@ -30,3 +17,22 @@ Published in <i>Uncertainty in Artificial Intelligence: Proceedings of the Twent
 
 
 http://cs.nyu.edu/~dsontag/papers/BrennerSontag_uai13.pdf
+
+
+Dependencies:
+=============
+
+run_experiments.pl has been tested on OSX 10.8 and Ubuntu Linux.
+
+Gobnilp1.3 and its dependency Scip
+
+In order to run perl/run_experiments.pl you have to have 
+
+gobnilp1.3/bin/gobnilp
+
+under the perl directory.u
+
+In ther perl directory itself, you have to have ../perl/gobnilp.set
+
+In run_experiments.pl, comment in/out the sed commands which will work on your OS.  These lines are labelled "OSX" or "Linux". 
+
