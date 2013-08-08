@@ -216,7 +216,8 @@ double LgBetaTable::interpolateWithKL( int N, double KL, double gamma, double cu
 	  double smallest_KL = KL_at_Pos.at(0);
 	  if (KL < smallest_KL) {
 		  //cout << "KL less than smallest KL";
-		  double nextSmallest_KL = KL_at_Pos.at(1); //assumes KL_at_Pos has length at least 2
+		  if (KL_at_Pos.size() < 2) return lgBeta_at_Pos.at(0);
+		  double nextSmallest_KL = KL_at_Pos.at(1);
 		  double first_LgBeta = lgBeta_at_Pos.at(0);
 		  double second_LgBeta = lgBeta_at_Pos.at(1);
 		  double * candidate = (gamma<eta)  ? &(second_LgBeta) : &(first_LgBeta);
