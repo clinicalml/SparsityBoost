@@ -13,7 +13,7 @@ import probabilityDistribution as pd
 import probabilityDistributionFactory as pdf
 import numpy as np
 
-class Test(unittest.TestCase):
+class TestProbabilityDistribution(unittest.TestCase):
 
 
     def testFirstAndSecondMarginals(self):

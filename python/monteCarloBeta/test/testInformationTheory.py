@@ -13,7 +13,7 @@ import informationTheory as it
 import logging
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
-class Test(unittest.TestCase):
+class TestInformationTheory(unittest.TestCase):
         
     def test_KL_div_term(self):
         np.testing.assert_almost_equal(it.KL_div_term(0, 1),0,decimal=10)
