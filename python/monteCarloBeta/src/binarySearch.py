@@ -20,6 +20,9 @@ class binarySearch(object):
         self.maxDepth = maxDepth
         
     def search(self,x0,x1,y_hat,depth=0):
+        logging.debug(
+        "Performing binary search with x0=%s, x1=%s, y_hat=%s, depth=%s,"%(
+        x0,x1,y_hat,depth))
         if self.increasingFunction is None:
             raise ValueError("Cannot perform binary search without an increasing function.")
         if depth > self.maxDepth:

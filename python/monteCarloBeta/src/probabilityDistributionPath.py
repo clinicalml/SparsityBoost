@@ -32,7 +32,10 @@ class probabilityDistributionPath(object):
         self.t_min = self.t_min()
         #for situations where it is convenient to mark a special p_eta as the base for calculating KL-divergnece:
         self.markedProbabilityDist = None
-        self.binarySearchOnKLDivergence = bS.binarySearch(tolerance_exp=10,maxDepth=500,increasingFunction=self.KL_divergence_at_t)
+        self.binarySearchOnKLDivergence = bS.binarySearch(
+        tolerance_exp=10,maxDepth=500,increasingFunction=self.KL_divergence_at_t)
+        self.binarySearchOnMinusKLDivergence = bS.binarySearch(
+        tolerance_exp=10,maxDepth=500,increasingFunction= self.minus_KL_divergence_at_t)
 
     def t_max(self):
         base_parameters = self.base_probability_distribution.distribution
@@ -97,6 +100,9 @@ class probabilityDistributionPath(object):
         distribution_at_t_for_this_path = self.distribution_at_t(t)
         return base_distribution.KL_divergence_as_base(distribution_at_t_for_this_path)
     
+    def minus_KL_divergence_at_t(self,t):
+        return -self.KL_divergence_at_t(t)
+    
     def KL_divergence_at_max_t(self):
         return self.KL_divergence_at_t(self.t_max)
     
@@ -156,7 +162,7 @@ class probabilityDistributionPath(object):
         KL_divergence_at_current_t = self.KL_divergence_at_t(current_guess_t)
         if (eta > KL_divergence_at_current_t):
             return current_guess_t #which equals self.t_max-tolerance in this case
-        return self.distribution_at_t(self.binarySearchOnKLDivergence.search(lower_limit,upper_limit,eta))
+        return self.binarySearchOnKLDivergence.search(lower_limit,upper_limit,eta)
     
     
     
@@ -172,7 +178,7 @@ class probabilityDistributionPath(object):
         KL_divergence_at_current_t = self.KL_divergence_at_t(-current_guess_t)
         if (eta > KL_divergence_at_current_t):
             raise Exception("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
-        return self.binarySearchOnKLDivergence.search(-upper_limit,lower_limit,eta)
+        return self.binarySearchOnMinusKLDivergence.search(-upper_limit,lower_limit,-eta)
     
     def lengthOfSegmentofKLDivergenceLessThanSpecified(self,eta):
         """

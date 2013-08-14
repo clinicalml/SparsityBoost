@@ -28,42 +28,51 @@ class Test(unittest.TestCase):
         del(self.factory)
         del(self.factoryUniform)
 
-
+    #@unittest.skip("demonstrating skipping")
     def testMinAndMax_t(self):
         self.failUnlessAlmostEqual(self.path.t_max, 0.0099999999999999985)
         self.failUnlessAlmostEqual(self.path.t_min, -0.089999999999999983)
-        
+    
+    #@unittest.skip("demonstrating skipping")        
     def testKL_DivergenceCalcs(self):
         self.failUnlessAlmostEqual(self.path.KL_divergence_at_t(0.005), 0.0018225000889761831)
         self.failUnlessAlmostEqual(self.path.KL_divergence_at_max_t(), 0.011134087132719479)
         self.failUnlessAlmostEqual(self.path.KL_divergence_at_min_t(), 0.32508297339144726)
-        
-    def testFinding_t_from_KL_Divergence(self):
-        self.failUnlessAlmostEqual(self.path.t_at_specified_divergence_from_base_pos_t_orMax_t(0.0018225000889761831), 0.005)
-        self.failUnlessAlmostEqual(self.path.t_at_specified_divergence_from_base_pos_t_orMax_t(0.0018225000889761831+.1), 0.0099999999999999985)
-        self.failUnlessAlmostEqual(self.path.smallestNeg_t_atWhichKLDivergenceFromBaseIsLessThanEta(0.005), -0.0099156144151186665 )
     
+    def testFinding_t_from_KL_Divergence(self):
+        self.failUnlessAlmostEqual(
+        self.path.t_at_specified_divergence_from_base_pos_t_orMax_t(0.0018225000889761831), 0.005)
+        self.failUnlessAlmostEqual(
+        self.path.t_at_specified_divergence_from_base_pos_t_orMax_t(0.0018225000889761831+.1), 0.0099999999999999985)
+        self.failUnlessAlmostEqual(
+        self.path.smallestNeg_t_atWhichKLDivergenceFromBaseIsLessThanEta(0.005), -0.0099156144151186665 )
+
+    #@unittest.skip("demonstrating skipping")    
     def testLengthOfSegment(self):
         self.failUnlessAlmostEqual(self.path.lengthOfSegmentofKLDivergenceLessThanSpecified(0.005), 0.017617308260382991 )
     
+    #@unittest.skip("demonstrating skipping")    
     def testMarkedDistributions(self):
         self.failUnlessAlmostEqual(self.pathUniform.tOfMarkedDistribution(), 0.035296285045184561)
         self.failUnlessAlmostEqual(self.pathUniform.convertTauToKLDivergenceFromMarkedDistribution(1e-3), 0.0047119020864278272)
-    
+
+    #@unittest.skip("demonstrating skipping")    
     def test_t_atSpecified_KL_DivergenceFromMarkedDistribution(self):
         tauSpecified = 1e-3
         self.failUnlessAlmostEqual(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified), 0.024206270787431289)
         recoveredDistribution = self.pathUniform.distribution_at_t_as_distribution(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified))
         markedDistribution = self.pathUniform.markedProbabilityDist
         self.failUnlessAlmostEqual(markedDistribution.KL_divergence_as_base(recoveredDistribution.distribution), tauSpecified)
-        
+
+    #@unittest.skip("demonstrating skipping")        
     def test_t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(self):
         tauSpecified = 1e-3
         self.failUnlessAlmostEqual(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified), 0.046339227999196209)
         recoveredDistribution = self.pathUniform.distribution_at_t_as_distribution(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified))
         markedDistribution = self.pathUniform.markedProbabilityDist
         self.failUnlessAlmostEqual(markedDistribution.KL_divergence_as_base(recoveredDistribution.distribution), tauSpecified)
-   
+        
+    #@unittest.skip("demonstrating skipping")
     def testTau(self):
         eta0 = 0.001
         eta1 = 0.69

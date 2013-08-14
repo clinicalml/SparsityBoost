@@ -4,9 +4,9 @@ digraph unix {
 	node [color=lightblue2, style=filled];
 	"informationTheory" -> "probabilityDistribution";
 	"informationTheory" -> "betaTable";
-	"6th Edition" -> "LSX";
-	"6th Edition" -> "1 BSD";
-	"6th Edition" -> "Mini Unix";
+	"probabilityDistribution" -> "probabilityDistributionPath";
+	"probabilityDistribution" -> "probabilityDistributionFactory";
+	"probabilityDistribution" -> "probabilityDistributionPathFactory";
 	"6th Edition" -> "Wollongong";
 	"6th Edition" -> "Interdata";
 	"Interdata" -> "Unix/TS 3.0";
