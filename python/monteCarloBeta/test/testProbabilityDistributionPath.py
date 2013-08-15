@@ -28,12 +28,10 @@ class Test(unittest.TestCase):
         del(self.factory)
         del(self.factoryUniform)
 
-    #@unittest.skip("demonstrating skipping")
     def testMinAndMax_t(self):
         self.failUnlessAlmostEqual(self.path.t_max, 0.0099999999999999985)
         self.failUnlessAlmostEqual(self.path.t_min, -0.089999999999999983)
     
-    #@unittest.skip("demonstrating skipping")        
     def testKL_DivergenceCalcs(self):
         self.failUnlessAlmostEqual(self.path.KL_divergence_at_t(0.005), 0.0018225000889761831)
         self.failUnlessAlmostEqual(self.path.KL_divergence_at_max_t(), 0.011134087132719479)
@@ -51,12 +49,10 @@ class Test(unittest.TestCase):
     def testLengthOfSegment(self):
         self.failUnlessAlmostEqual(self.path.lengthOfSegmentofKLDivergenceLessThanSpecified(0.005), 0.017617308260382991 )
     
-    #@unittest.skip("demonstrating skipping")    
     def testMarkedDistributions(self):
         self.failUnlessAlmostEqual(self.pathUniform.tOfMarkedDistribution(), 0.035296285045184561)
         self.failUnlessAlmostEqual(self.pathUniform.convertTauToKLDivergenceFromMarkedDistribution(1e-3), 0.0047119020864278272)
 
-    #@unittest.skip("demonstrating skipping")    
     def test_t_atSpecified_KL_DivergenceFromMarkedDistribution(self):
         tauSpecified = 1e-3
         self.failUnlessAlmostEqual(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified), 0.024206270787431289)
@@ -64,7 +60,6 @@ class Test(unittest.TestCase):
         markedDistribution = self.pathUniform.markedProbabilityDist
         self.failUnlessAlmostEqual(markedDistribution.KL_divergence_as_base(recoveredDistribution.distribution), tauSpecified)
 
-    #@unittest.skip("demonstrating skipping")        
     def test_t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(self):
         tauSpecified = 1e-3
         self.failUnlessAlmostEqual(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified), 0.046339227999196209)
@@ -72,7 +67,6 @@ class Test(unittest.TestCase):
         markedDistribution = self.pathUniform.markedProbabilityDist
         self.failUnlessAlmostEqual(markedDistribution.KL_divergence_as_base(recoveredDistribution.distribution), tauSpecified)
         
-    #@unittest.skip("demonstrating skipping")
     def testTau(self):
         eta0 = 0.001
         eta1 = 0.69

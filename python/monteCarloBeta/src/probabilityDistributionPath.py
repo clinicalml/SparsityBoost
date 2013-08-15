@@ -3,11 +3,10 @@ Created on May 25, 2012
 
 @author: eliotpbrenner
 
-TODO: explain purpose
-TODO: replace repeated code with general purpose binary search algorithm
+A path p(t) of distributions in the space of joint distributions
+over  pair of variables, all of which share fixed marginals, as in the paper/thesis.
 '''
 
-#TODO: move th
 max_iterations_for_binary_search = 40000
 tolerance = 1E-10
 toleranceForPGammaRecovery = 1E-15
@@ -293,33 +292,6 @@ class probabilityDistributionPath(object):
         return self.tOfMarkedDistribution() - s
         
         
-        """
-        current_guess_t = upper_limit/2.0
-        #print current_guess_t
-        
-        
-        KL_divergence_at_current_t = self.markedProbabilityDist.KL_divergence_as_base(
-        self.distribution_at_t_as_distribution(current_guess_t).distribution)       
-        
-        difference_from_specifiedDivergence = specifiedDivergence - KL_divergence_at_current_t
-        num_iteration = 0
-        while (np.abs(difference_from_specifiedDivergence) > toleranceForPGammaRecovery and num_iteration < max_iterations_for_binary_search):
-            if difference_from_specifiedDivergence > 0:  #the KL-divergence at the current t is less than the desired
-                upper_limit = current_guess_t
-            else:    #difference_from_specifiedDivergence < 0, meaning the KL_divergence at the current t is greater than the desired
-                lower_limit = current_guess_t
-            current_guess_t = (upper_limit + lower_limit)/2.0
-            #print current_guess_t
-            KL_divergence_at_current_t = self.markedProbabilityDist.KL_divergence_as_base(
-            self.distribution_at_t_as_distribution(current_guess_t).distribution)    
-            
-            difference_from_specifiedDivergence = specifiedDivergence - KL_divergence_at_current_t
-            #print difference_from_specifiedDivergence
-            num_iteration+=1
-        if( num_iteration >= max_iterations_for_binary_search):
-            print "Warning: number of iterations for binary search exceeded maximum, without successful termination of search"
-        return current_guess_t
-        """
       
       
     def t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(self, specifiedDivergence):
@@ -335,36 +307,31 @@ class probabilityDistributionPath(object):
             raise Exception("No marked distribution.")
         lower_limit = self.tOfMarkedDistribution()
         upper_limit = self.t_max
-        current_guess_t = lower_limit
-        #print current_guess_t
-        KL_divergence_at_current_t = self.markedProbabilityDist.KL_divergence_as_base(
-        self.distribution_at_t_as_distribution(current_guess_t).distribution)
         
-        if (specifiedDivergence < KL_divergence_at_current_t):
-            raise Exception("Specified divergence " + str(specifiedDivergence) + " is less than KL_divergence_at_current_t= " + str(KL_divergence_at_current_t))
-        current_guess_t = (lower_limit + upper_limit)/2.0
-        #print current_guess_t
-        KL_divergence_at_current_t = self.markedProbabilityDist.KL_divergence_as_base(
-        self.distribution_at_t_as_distribution(current_guess_t).distribution)       
+        #KL(p(t_max) || p^\eta)
+        KL_divergence_at_upper_limit = self.markedProbabilityDist.\
+            KL_divergence_as_base(  #KL(\cdot \| p^\eta)
+        self.distribution_at_t_as_distribution(
+            upper_limit #0
+            ).distribution) #p(t_max)
         
-        difference_from_specifiedDivergence = specifiedDivergence - KL_divergence_at_current_t
-        num_iteration = 0
-        while (np.abs(difference_from_specifiedDivergence) > toleranceForPGammaRecovery and num_iteration < max_iterations_for_binary_search):
-            if difference_from_specifiedDivergence > 0:  #the KL-divergence at the current t is less than the desired
-                lower_limit = current_guess_t
-            else:    #difference_from_specifiedDivergence < 0, meaning the KL_divergence at the current t is greater than the desired
-                upper_limit = current_guess_t
-            current_guess_t = (upper_limit + lower_limit)/2.0
-            #print current_guess_t
-            KL_divergence_at_current_t = self.markedProbabilityDist.KL_divergence_as_base(
-            self.distribution_at_t_as_distribution(current_guess_t).distribution)    
+        if (specifiedDivergence > KL_divergence_at_upper_limit):
+            raise Exception("Specified divergence " + str(specifiedDivergence) + 
+            " is greater than KL_divergence of uniform dist based at p^\eta = " 
+            + str(KL_divergence_at_upper_limit))
             
-            difference_from_specifiedDivergence = specifiedDivergence - KL_divergence_at_current_t
-            #print difference_from_specifiedDivergence
-            num_iteration+=1
-        if( num_iteration >= max_iterations_for_binary_search):
-            print "Warning: number of iterations for binary search exceeded maximum, without successful termination of search"
-        return current_guess_t
+
+        #increasingFunct(t)=KL(p(t) ||  p^\eta)
+        increasingFunct = lambda t : self.markedProbabilityDist.\
+            KL_divergence_as_base(  #KL(\cdot \| p^\eta)
+        self.distribution_at_t_as_distribution(t).distribution) #p(t)
+
+        self.binarySearchOnKLDivFromMarkedDistribution = bS.binarySearch(
+            tolerance_exp=15,maxDepth=500,increasingFunction=increasingFunct)
+            
+        return self.binarySearchOnKLDivFromMarkedDistribution.search(
+            lower_limit,upper_limit,specifiedDivergence)
+    
     
 def gammaCorrespToKLDivergence(KL_div):
     k,l=2,2
@@ -373,17 +340,6 @@ def gammaCorrespToKLDivergence(KL_div):
     t=thePath.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(KL_div)
     return thePath.KL_divergence_at_t(t)
         
-        
-def main():
-    #TODO: replace by tests
-    eta = 0.01
-    KL_div = 8.56e-3
-    k,l=2,2
-    thePath = pdpf.probabilityDistributionPathFactory([1.0/k,1.0/l],k,l).construct()
-    thePath.markP_eta(eta)
-    t=thePath.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(KL_div)
-    gamma = thePath.KL_divergence_at_t(t)
-    print gamma
     
 if __name__ == '__main__':
     main()    
