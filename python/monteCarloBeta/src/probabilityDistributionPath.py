@@ -74,7 +74,7 @@ class probabilityDistributionPath(object):
         t_max = self.t_max
         t_min = self.t_min
         if t > t_max + tolerance or t < t_min - tolerance:
-            raise Exception('t= ' + str(t) + 'but t_max=' + str(t_max) + ' and t_min=' + str(t_min)) 
+            raise ValueError('t= ' + str(t) + ' but t_max=' + str(t_max) + ' and t_min=' + str(t_min)) 
         base_parameters = self.base_probability_distribution.distribution
         num_rows = np.shape(base_parameters)[0]
         num_cols = np.shape(base_parameters)[1]
@@ -116,7 +116,7 @@ class probabilityDistributionPath(object):
         lower_limit = 0
         KL_divergence_at_current_t = self.KL_divergence_at_t(upper_limit)
         if (eta > KL_divergence_at_current_t):
-            raise Exception("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
+            raise ValueError("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
         return self.distribution_at_t(self.binarySearchOnKLDivergence.search(lower_limit,upper_limit,eta))
         
     
@@ -132,7 +132,7 @@ class probabilityDistributionPath(object):
         #print current_guess_t
         KL_divergence_at_current_t = self.KL_divergence_at_t(-upper_limit)
         if (eta > KL_divergence_at_current_t):
-            raise Exception("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
+            raise ValueError("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
         return self.distribution_at_t(self.binarySearchOnKLDivergence.search(-upper_limit,lower_limit,eta))
 
 
@@ -145,7 +145,7 @@ class probabilityDistributionPath(object):
         lower_limit = 0
         KL_divergence_at_current_t = self.KL_divergence_at_t(upper_limit)
         if (eta > KL_divergence_at_current_t):
-            raise Exception("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
+            raise ValueError("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
         return self.binarySearchOnKLDivergence.search(lower_limit,upper_limit,eta)        
  
  
@@ -176,7 +176,7 @@ class probabilityDistributionPath(object):
         #print current_guess_t
         KL_divergence_at_current_t = self.KL_divergence_at_t(-current_guess_t)
         if (eta > KL_divergence_at_current_t):
-            raise Exception("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
+            raise ValueError("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
         return self.binarySearchOnMinusKLDivergence.search(-upper_limit,lower_limit,-eta)
     
     def lengthOfSegmentofKLDivergenceLessThanSpecified(self,eta):
@@ -230,7 +230,7 @@ class probabilityDistributionPath(object):
         to p_gamma, i.e. KL(p_\tau^+ \| p_\eta^+)
         '''
         if not self.markedProbabilityDist:
-            raise Exception("No marked distribution.")
+            raise ValueError("No marked distribution.")
         t_tau_plus = self.t_at_specified_divergence_from_base_pos_t(tauValue) 
         distributionAt_t_tau_plus =  self.distribution_at_t_as_distribution(
             t_tau_plus) #p_\tau^+
@@ -241,14 +241,14 @@ class probabilityDistributionPath(object):
         if self.base_probability_distribution.k() != 2 or self.base_probability_distribution.l() != 2:
             raise NotImplementedError("k=%s, l=%s"%(self.base_probability_distribution.k(),self.base_probability_distribution.l()))
         if not self.markedProbabilityDist:
-            raise Exception("No marked distribution.")
+            raise ValueError("No marked distribution.")
         differenceOfParameters = self.markedProbabilityDist.distribution - \
             self.base_probability_distribution.distribution
         return differenceOfParameters[0,0]
         
      
     
-    def t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(self, specifiedDivergence):
+    def t_at_specifiedDivergenceFromMarkedDistInDirectionOfBase(self, specifiedDivergence):
         
         """
         This only looks in the direction of negative t from the marked distribution
@@ -261,7 +261,7 @@ class probabilityDistributionPath(object):
         for more documentation (through the test)
         """
         if not self.markedProbabilityDist:
-            raise Exception("No marked distribution.")
+            raise ValueError("No marked distribution.")
         upper_limit = self.tOfMarkedDistribution()
         lower_limit = 0
         #KL_divergence_at_upper_limit = KL(p^0 \| p^\eta)
@@ -272,7 +272,7 @@ class probabilityDistributionPath(object):
             ).distribution) #p^0
         
         if (specifiedDivergence > KL_divergence_at_upper_limit):
-            raise Exception("Specified divergence " + str(specifiedDivergence) + 
+            raise ValueError("Specified divergence " + str(specifiedDivergence) + 
             " is greater than KL_divergence of uniform dist based at p^\eta = " 
             + str(KL_divergence_at_upper_limit))
             
@@ -294,17 +294,19 @@ class probabilityDistributionPath(object):
         
       
       
-    def t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(self, specifiedDivergence):
+    def t_at_specifiedDivergenceFromMarkedDistAwayFromBase(self, specifiedDivergence):
         """
         This only looks in the direction of positive t from the marked distribution
         to find a distribution of the specified KL-divergence from the
         "marked distribution" with the marked distribution as base.
-        The method supposes that the marked distribution is in the positive-t direction from the base:
-        See the testProbabilityDistributionPath.test_t_at_spcifiedDivergenceFromMarkedDistAwayFromBase
+        The method supposes that the marked distribution is in the
+        positive-t direction from the base:
+        See the 
+        testProbabilityDistributionPath.test_t_at_specifiedDivergenceFromMarkedDistAwayFromBase
         for more documentation (through the test)
         """
         if not self.markedProbabilityDist:
-            raise Exception("No marked distribution.")
+            raise ValueError("No marked distribution.")
         lower_limit = self.tOfMarkedDistribution()
         upper_limit = self.t_max
         
@@ -316,7 +318,7 @@ class probabilityDistributionPath(object):
             ).distribution) #p(t_max)
         
         if (specifiedDivergence > KL_divergence_at_upper_limit):
-            raise Exception("Specified divergence " + str(specifiedDivergence) + 
+            raise ValueError("Specified divergence " + str(specifiedDivergence) + 
             " is greater than KL_divergence of uniform dist based at p^\eta = " 
             + str(KL_divergence_at_upper_limit))
             
@@ -332,13 +334,7 @@ class probabilityDistributionPath(object):
         return self.binarySearchOnKLDivFromMarkedDistribution.search(
             lower_limit,upper_limit,specifiedDivergence)
     
-    
-def gammaCorrespToKLDivergence(KL_div):
-    k,l=2,2
-    thePath = pdpf.probabilityDistributionPathFactory([1.0/k,1.0/l],k,l).construct()
-    thePath.markP_eta(0.01)
-    t=thePath.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(KL_div)
-    return thePath.KL_divergence_at_t(t)
+ 
         
     
 if __name__ == '__main__':

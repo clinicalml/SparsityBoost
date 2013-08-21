@@ -40,11 +40,14 @@ class emissionProbabilityCalculator(object):
     
     def RobbinsEstimateOfEmissionProbability(self, firstMarginal, secondMarginal, t):
         """
-        Evaluate the function estimating, from above, the probability of emission of a type of size N "close to" 
-        the the probability distribution parameterized by the triple (firstMarginal, secondMarginal, t)
-        Before calling the actual evaluation of the probabilityCalculatorObject, checks that
-        the three parameters (firstMarginal, secondMarginal, t) actually parameterize a valid probability distribution
-        Only implemented for binary/binary (k=l=2 case) yet
+        Evaluate the function estimating, from above, the probability of emission
+        of a type of size N "close to" 
+        the the probability distribution parameterized by the triple 
+        (firstMarginal, secondMarginal, t)
+        Before calling the actual evaluation of the probabilityCalculatorObject, 
+        checks that the three parameters (firstMarginal, secondMarginal, t) 
+        actually parameterize a valid probability distribution
+        Only implemented for binary/binary (k=l=2 case) yet.
         """
         N = self.N
         #checking the marginals are within bounds or probability simplex: in case not or if the parameter t

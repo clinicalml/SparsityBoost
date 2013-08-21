@@ -7,9 +7,11 @@ Created on Oct 22, 2012
 
 import sys
 sys.path.insert(0, '../src')
+from nose import tools
 
 import unittest
 import probabilityDistributionPathFactory as pdpf
+import probabilityDistribution as pd
 import probabilityDistributionPath as pdp
 import probabilityDistributionFactory as pdf
 
@@ -44,7 +46,20 @@ class Test(unittest.TestCase):
         self.path.t_at_specified_divergence_from_base_pos_t_orMax_t(0.0018225000889761831+.1), 0.0099999999999999985)
         self.failUnlessAlmostEqual(
         self.path.smallestNeg_t_atWhichKLDivergenceFromBaseIsLessThanEta(0.005), -0.0099156144151186665 )
-
+        
+        
+    @tools.raises(ValueError)
+    def testRaisingExceptionForEtaTooLarge(self):
+         self.pathUniform.t_at_specified_divergence_from_base_neg_t(1.0)
+    
+    @tools.raises(ValueError)
+    def testRaisingExceptionForEtaTooLarge(self):
+         self.pathUniform.distribution_at_t(1.0)
+    
+    def test_t_at_specified_divergence_from_base_pos_t_orMax_t(self):
+         t=self.pathUniform.t_at_specified_divergence_from_base_pos_t_orMax_t(1.0)
+         self.failUnlessAlmostEqual(t,0.25,7)         
+         
     #@unittest.skip("demonstrating skipping")    
     def testLengthOfSegment(self):
         self.failUnlessAlmostEqual(self.path.lengthOfSegmentofKLDivergenceLessThanSpecified(0.005), 0.017617308260382991 )
@@ -53,20 +68,35 @@ class Test(unittest.TestCase):
         self.failUnlessAlmostEqual(self.pathUniform.tOfMarkedDistribution(), 0.035296285045184561)
         self.failUnlessAlmostEqual(self.pathUniform.convertTauToKLDivergenceFromMarkedDistribution(1e-3), 0.0047119020864278272)
 
+
+    @tools.raises(NotImplementedError)
+    def testRaiseNotImplementedError(self):
+        k,l = 3,3
+        prob_dist = pd.ProbabilityDistribution(k,l)
+        probDistPath = pdp.probabilityDistributionPath(prob_dist)
+        probDistPath.tOfMarkedDistribution()
+    
     def test_t_atSpecified_KL_DivergenceFromMarkedDistribution(self):
         tauSpecified = 1e-3
-        self.failUnlessAlmostEqual(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified), 0.024206270787431289)
-        recoveredDistribution = self.pathUniform.distribution_at_t_as_distribution(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified))
+        self.failUnlessAlmostEqual(self.pathUniform.t_at_specifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified), 0.024206270787431289)
+        recoveredDistribution = self.pathUniform.distribution_at_t_as_distribution(self.pathUniform.t_at_specifiedDivergenceFromMarkedDistInDirectionOfBase(tauSpecified))
         markedDistribution = self.pathUniform.markedProbabilityDist
         self.failUnlessAlmostEqual(markedDistribution.KL_divergence_as_base(recoveredDistribution.distribution), tauSpecified)
 
-    def test_t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(self):
+    def test_t_at_specifiedDivergenceFromMarkedDistAwayFromBase(self):
         tauSpecified = 1e-3
-        self.failUnlessAlmostEqual(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified), 0.046339227999196209)
-        recoveredDistribution = self.pathUniform.distribution_at_t_as_distribution(self.pathUniform.t_at_spcifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified))
+        self.failUnlessAlmostEqual(self.pathUniform.t_at_specifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified), 0.046339227999196209)
+        recoveredDistribution = self.pathUniform.distribution_at_t_as_distribution(self.pathUniform.t_at_specifiedDivergenceFromMarkedDistAwayFromBase(tauSpecified))
         markedDistribution = self.pathUniform.markedProbabilityDist
         self.failUnlessAlmostEqual(markedDistribution.KL_divergence_as_base(recoveredDistribution.distribution), tauSpecified)
-        
+
+    @tools.raises(ValueError)
+    def test_exceptional_t_at_specifiedDivergenceFromMarkedDistAwayFromBase(self):
+        tauSpecified = 1.0
+        self.failUnlessAlmostEqual(
+            self.pathUniform.t_at_specifiedDivergenceFromMarkedDistAwayFromBase(
+                tauSpecified), 0.046339227999196209)
+    
     def testTau(self):
         eta0 = 0.001
         eta1 = 0.69
