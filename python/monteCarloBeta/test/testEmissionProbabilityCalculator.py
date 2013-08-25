@@ -5,7 +5,9 @@ Created on Nov 1, 2012
 '''
 import unittest
 
-import src.emissionProbabilityCalculator as epc
+import sys
+sys.path.insert(0, '../src')
+import emissionProbabilityCalculator as epc
 
 class Test(unittest.TestCase):
 

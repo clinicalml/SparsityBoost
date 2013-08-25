@@ -9,4 +9,16 @@ digraph unix {
 	"probabilityDistribution" -> "probabilityDistributionPathFactory";
     "probabilityDistributionPath" -> "probabilityDistributionFactory";
     "probabilityDistributionPath" -> "probabilityDistributionPathFactory";
+    "emissionProbabilityCalculator" -> "betaTable";
+    "emissionProbabilityCalculator" -> "statsDistributionFactory";
+    "statsDistributionFactory" -> "betaTable";
+    "functionAlgorithms" -> "statsDistributionFactory";
+    "probabilityCalculator" -> "emissionProbabilityCalculator";
+    "probabilityDistributionFactory" -> "betaTable";
+    "probabilityDistributionFactory" -> "emissionProbabilityCalculator";
+    "probabilityDistributionFactory" ->  "probabilityCalculator";
+    "probabilityDistributionPathFactory"->  "betaTable";
+    "probabilityDistributionPathFactory"->  "emissionProbabilityCalculator";
+    "probabilityDistributionPathFactory"->  "probabilityCalculator";
+    "probabilityDistributionPathFactory"-> "statsDistributionFactory";
 }

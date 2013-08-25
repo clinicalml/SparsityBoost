@@ -30,4 +30,16 @@ class probabilityDistributionPathFactory(object):
                                                                                              secondMarginalsAsMatrix)
         return pdp.probabilityDistributionPath(productDistributionWithFeasibleMarginals)
 
+def main():
+    import itertools    
+    displacements = np.arange(0.05,0.45,0.05)
+    for displacedMarginals in itertools.product(displacements,displacements):
+        probabilityDistribution = probabilityDistributionPathFactory(
+          displacedMarginals,2,2).construct()
         
+        
+        
+        
+        
+if __name__ == "__main__":
+    main()     

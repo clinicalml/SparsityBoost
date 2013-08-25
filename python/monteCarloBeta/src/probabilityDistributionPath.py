@@ -13,14 +13,14 @@ toleranceForPGammaRecovery = 1E-15
 
 import probabilityDistribution as pd
 import numpy as np
-import probabilityDistributionPathFactory as pdpf
 import binarySearch as bS
 
 
 
 class probabilityDistributionPath(object):
     '''
-    Assumes that the path is of the form p_0 + t* Delta, where p_0 is a product distribution and Delta is a 
+    Assumes that the path is of the form p_0 + t* Delta, where 
+    p_0 is a product distribution and Delta is a 
     checkerboard pattern of +1 and -1
     '''
 
@@ -118,7 +118,14 @@ class probabilityDistributionPath(object):
         if (eta > KL_divergence_at_current_t):
             raise ValueError("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
         return self.distribution_at_t(self.binarySearchOnKLDivergence.search(lower_limit,upper_limit,eta))
-        
+     
+    def distribution_at_speicified_divergence_from_base_pos_t_as_distribution(self,eta):
+        upper_limit = self.t_max-tolerance
+        lower_limit = 0
+        KL_divergence_at_current_t = self.KL_divergence_at_t(upper_limit)
+        if (eta > KL_divergence_at_current_t):
+            raise ValueError("KL_divergence_at_t_max= " + str(KL_divergence_at_current_t) + " is less than eta= " + str(eta))
+        return self.distribution_at_t_as_distribution(self.binarySearchOnKLDivergence.search(lower_limit,upper_limit,eta))
     
 
     def distribution_at_specified_divergence_from_base_neg_t(self, eta):
@@ -334,8 +341,8 @@ class probabilityDistributionPath(object):
         return self.binarySearchOnKLDivFromMarkedDistribution.search(
             lower_limit,upper_limit,specifiedDivergence)
     
- 
-        
+def main():
+    pass
     
 if __name__ == '__main__':
     main()    
