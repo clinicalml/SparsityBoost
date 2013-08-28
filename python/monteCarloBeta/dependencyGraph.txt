@@ -21,4 +21,10 @@ digraph unix {
     "probabilityDistributionPathFactory"->  "emissionProbabilityCalculator";
     "probabilityDistributionPathFactory"->  "probabilityCalculator";
     "probabilityDistributionPathFactory"-> "statsDistributionFactory";
+    "probabilitDistributionFactory" -> "CDF";
+    "typePrefix" -> "CDF";
+    "binarySearch" -> "probabilityDistributionPath";
+
+    
+     
 }

@@ -18,6 +18,18 @@ Published in <i>Uncertainty in Artificial Intelligence: Proceedings of the Twent
 
 http://cs.nyu.edu/~dsontag/papers/BrennerSontag_uai13.pdf
 
+Basic Usage:
+==============
+The library exists in two independent parts, in different languages and with different purposes: the parts under c/, in C/C++, are for learning networks, and the parts under python/monteCarloBeta
+are for computing the values of beta needed for the interpolation.  We recommend starting by trying to learn the structure of a network, by assuming that eta (a lower bound for the edge strength) takes one of the following values:
+
+0.04, 0.02, 0.01, 0.005, 0.001
+
+In this case, the user only needs to run the C/C++ parts of the library.  A typical invocation of the main method, ../c/bscore, looks like this:
+
+../c/bscore -bic -nodes 37 -maxpa 4 -data ../data/synthetic_examples/experiments/0/alarm4400.dat -mod_out ../results/experiments/0/sparsity_eps005/model4400.mod -edge_scores .005
+ gobnilp1.3/bin/gobnilp -g../results/experiments/0/sparsity_eps005/gobnilp4400.set ../results/experiments/0/sparsity_eps005/model4400.mod > ../results/experiments/0/sparsity_eps005/output4400.txt
+
 
 Dependencies:
 =============

@@ -32,6 +32,8 @@ class Test(unittest.TestCase):
     def tearDown(self):
         pass
 
+
+    @unittest.skip("showing class skipping")
     def testAccountForType(self):
         """
         When the (partial) CDF accounts for only one, type
@@ -46,7 +48,9 @@ class Test(unittest.TestCase):
         self.CDF.accountForType([1,1,1,4])
         self.failUnlessAlmostEqual(CDF.tauOfType([1,1,1,4], 7),0.0427972344694)
         self.failUnlessAlmostEqual(self.CDF.Dictionary, {0.042797234469424295: 0.024888873765445504})
-        
+
+
+    @unittest.skip("showing class skipping")       
     def testAccountForAllTypesWithTwoElementPrefix(self):
         p_eta = pdf.probabilityDistributionFactory(2,2).get_p_eta(0.1)
         self.CDF.referenceDistribution = p_eta
@@ -56,6 +60,8 @@ class Test(unittest.TestCase):
         self.failUnlessAlmostEqual(self.CDF.Dictionary, {0.013844293808390619: 0.054900966738391482,
                                                          0.11849392256130019: 0.065587032834470232,
                                                          0.2911031660323688: 0.13610213450308134} )
+
+    @unittest.skip("showing class skipping")
     def testAccountForAllTypes(self):
         p_eta = pdf.probabilityDistributionFactory(2,2).get_p_eta(0.1)
         self.CDF.referenceDistribution = p_eta
@@ -75,7 +81,8 @@ class Test(unittest.TestCase):
         self.failUnlessEqual(len(self.CDF2.AscendingDiscontinuityList), 2009)
         self.failUnlessAlmostEqual(self.CDF2.Dictionary[self.CDF.AscendingDiscontinuityList[-1]], 1.0)
         self.failUnlessAlmostEqual(self.CDF2.assignCumulativeProbability(0.1), 0.470627961298)
-        
+ 
+    @unittest.skip("showing class skipping")       
     def testMerge(self):
         self.CDF.accountForEvent(1, 0.3)
         self.CDF.accountForEvent(2, 0.05)
@@ -90,7 +97,8 @@ class Test(unittest.TestCase):
         self.failUnlessEqual(len(self.CDF.AscendingDiscontinuityList),4)
         self.failUnlessAlmostEqual(self.CDF.Dictionary[
           self.CDF.AscendingDiscontinuityList[-1]], 1.0)
-    
+
+    @unittest.skip("showing class skipping")    
     def testNewParallel(self):
         self.CDF.setReferenceDistribution_p_eta(0.1)
         self.CDF.setN(30)
@@ -103,6 +111,7 @@ class Test(unittest.TestCase):
         self.failUnlessAlmostEqual(
           self.CDF.assignCumulativeProbability(0.1), 0.470627961298)
     
+    @unittest.skip("showing class skipping")
     def testAccountForAllTypesRobbins(self):
         p_eta = pdf.probabilityDistributionFactory(2,2).get_p_eta(0.1)
         self.CDF.referenceDistribution = p_eta
@@ -112,7 +121,6 @@ class Test(unittest.TestCase):
         self.failUnlessAlmostEqual(
           self.CDF.assignCumulativeProbability(0.1), 0.49556072704210913)
 
-    @unittest.skip("showing class skipping")
     def testParallelNonUniformMarginals(self):
         import itertools 
         import numpy as np
@@ -132,7 +140,7 @@ class Test(unittest.TestCase):
             print "*************************************"
             print displacedMarginals
             print len(CDF1.Dictionary)
-            print CDF1.assignCumulativeProbability(0.01)
+            print CDF1.assignCumulativeProbability(eta)
             
              
     
