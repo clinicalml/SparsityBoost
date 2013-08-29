@@ -6,7 +6,7 @@ Created on Oct 21, 2012
 
 
 import sys
-sys.path.insert(0, '../src')
+sys.path.insert(0, '../montecarlobeta')
 
 import unittest
 import probabilityDistribution as pd

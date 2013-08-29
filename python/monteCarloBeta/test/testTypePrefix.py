@@ -5,7 +5,7 @@ Created on Mar 21, 2013
 '''
 import unittest
 import sys
-sys.path.insert(0, '../src')
+sys.path.insert(0, '../montecarlobeta')
 import typePrefix as tp
 
 

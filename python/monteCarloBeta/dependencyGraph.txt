@@ -1,4 +1,6 @@
-/* courtesy Ian Darwin and Geoff Collyer, Softquad Inc. */
+/* courtesy Ian Darwin and Geoff Collyer, Softquad Inc.
+    TODO: so far in-project dependencies only: not external libraries
+ */
 digraph unix {
 	size="6,6";
 	node [color=lightblue2, style=filled];
@@ -24,7 +26,11 @@ digraph unix {
     "probabilitDistributionFactory" -> "CDF";
     "typePrefix" -> "CDF";
     "binarySearch" -> "probabilityDistributionPath";
-
-    
-     
+    "probabilityDistributionPathFactory" -> "betaTable";
+    "probabilityDistributionFactory"-> "betaTable";
+    "emissionProbabilityCalculator"-> "betaTable";
+    "mcIntegrationWithStoppingCriteria"-> "betaTable";
+    "informationTheory"-> "betaTable";
+    "statsDistributionFactory"-> "betaTable";
+    "insertionPoints"-> "betaTable";
 }

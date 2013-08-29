@@ -4,7 +4,7 @@ Created on Mar 18, 2013
 @author: eliotpbrenner
 '''
 import sys
-sys.path.insert(0, '../src')
+sys.path.insert(0, '../montecarlobeta')
 import unittest
 import statsDistributionFactory as sdf
 

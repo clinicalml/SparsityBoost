@@ -6,7 +6,7 @@ Created on Oct 22, 2012
 
 
 import sys
-sys.path.insert(0, '../src')
+sys.path.insert(0, '../montecarlobeta')
 from nose import tools
 
 import unittest

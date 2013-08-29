@@ -33,7 +33,7 @@ benchMarkInterval_N = 100 #the kth line in the benchmark file contains results f
 class IntegrateWithStoppingCriterionTest(unittest.TestCase):
 
 
-    def testIntegratetoFlatFile(self):        
+    def _testIntegratetoFlatFile(self):        
         #load in benchmark data
         benchmarks = genfromtxt('cdf_for_valsets_of_variables_of_size2and2', delimiter=',', skip_header=4)
         benchmarks_without_stepsize = benchmarks[:,1:]
@@ -150,7 +150,7 @@ class IntegrateWithStoppingCriterionTest(unittest.TestCase):
 
     def testIntegratetoPickle(self):      
         #load in benchmark data
-        benchmarks = genfromtxt('cdf_for_valsets_of_variables_of_size2and2', delimiter=',', skip_header=4)
+        benchmarks = genfromtxt('cdf_for_valsets_of_variables_of_size2and2', delimiter=',', skip_header=5)
         benchmarks_without_stepsize = benchmarks[:,1:]
         lineInBenchMarkFileList = [4, 9, 14, 18]
         for lineInBenchMarkFile in lineInBenchMarkFileList:

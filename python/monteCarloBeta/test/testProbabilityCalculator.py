@@ -3,8 +3,8 @@ Created on Oct 31, 2012
 
 @author: eliotpbrenner
 '''
-
-sys.path.insert(0, '../src')
+import sys
+sys.path.insert(0, '../montecarlobeta')
 import unittest
 import probabilityCalculator as pc
 import probabilityDistributionFactory as pdf
