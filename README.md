@@ -18,36 +18,56 @@ Published in <i>Uncertainty in Artificial Intelligence: Proceedings of the Twent
 
 http://cs.nyu.edu/~dsontag/papers/BrennerSontag_uai13.pdf
 
+Installation:
+==============
+
+To install the c/ part of the library (the only part needed for learning networks) first type:
+
+make
+
+from the c/ directory.  This should create the bscore executable file in your c/ directory.
+
 Basic Usage:
 ==============
 The library exists in two independent parts, in different languages and with different purposes: the parts under c/, in C/C++, are for learning networks, and the parts under python/monteCarloBeta
-are for computing the values of beta needed for the interpolation.  We recommend starting by trying to learn the structure of a network, by assuming that eta (a lower bound for the edge strength) takes one of the following values:
+are for computing the values of beta needed for the interpolation.  
+
+We recommend starting by trying to learn the structure of a network, by assuming that eta (a lower bound for the edge strength) takes one of the following values:
 
 0.04, 0.02, 0.01, 0.005, 0.001
 
 In this case, the user only needs to run the C/C++ parts of the library.  A typical invocation of the main method, ../c/bscore, looks like this:
 
-../c/bscore -bic -nodes 37 -maxpa 4 -data ../data/synthetic_examples/experiments/0/alarm4400.dat -mod_out ../results/experiments/0/sparsity_eps005/model4400.mod -edge_scores .005
+../c/bscore -bic -nodes 37 -maxpa 4 -data ../data/synthetic_examples/experiments/0/alarm1000.dat -mod_out ../results/experiments/0/sparsity_eps005/model1000.mod -edge_scores .005
 
-Here, the .dat file consists of raw data.  Each row holds one observation, which is a series of 0s and 1s separated by spaces, one 0 or 1 for each variable in the system.
-The .mod file is a 
+The .dat file consists of raw data, in the format of a space-separated file.
+Each row holds one observation which is a line of 0s and 1s, one column for each variable in the system.
+The .mod file is in GOBNILP Score File Format, described on p. 11 of the GOBNILP manual:
 
- gobnilp1.3/bin/gobnilp -g../results/experiments/0/sparsity_eps005/gobnilp4400.set ../results/experiments/0/sparsity_eps005/model4400.mod > ../results/experiments/0/sparsity_eps005/output4400.txt
+http://www.cs.york.ac.uk/aig/sw/gobnilp/manual.pdf
 
-Dependencies:
-=============
+In particular, the first line is the number of variables in the network, and what follows are the local parts of our score corresponding to a pair of edges 
+(on a line by themsevles) and possible parent sets (at the beginning of the following lines with the scores). 
 
-run_experiments.pl has been tested on OSX 10.8 and Ubuntu Linux.
+In order to use this mod file to actually learn the nework, you can use GOBNILP or any other system that learns network structure from local scores.  For example, using gobnilp1.3:
 
-Gobnilp1.3 and its dependency Scip
+gobnilp1.3/bin/gobnilp ../results/experiments/0/sparsity_eps005/model4400.mod > ../results/experiments/0/sparsity_eps005/output4400.txt
+
+
+The script perl/run_experiments.pl reproduces the experiments in the UAI paper. 
 
 In order to run perl/run_experiments.pl you have to have 
 
 gobnilp1.3/bin/gobnilp
 
-under the perl directory.u
-
-In ther perl directory itself, you have to have ../perl/gobnilp.set
+under the perl directory.
 
 In run_experiments.pl, comment in/out the sed commands which will work on your OS.  These lines are labelled "OSX" or "Linux". 
+In the perl directory itself, you have to have the GOBNILP settings file gobnilp.set, which comes with this repository.  The sed commands will copy this GOBNILP settings file to the appropriate locations, such as../results/experiments/i/sparsity_eps005/, etc. 
+
+Dependencies:
+=============
+run_experiments.pl has been tested on OSX 10.8 and Ubuntu Linux.
+
+Gobnilp1.3 and its dependency Scip
 
