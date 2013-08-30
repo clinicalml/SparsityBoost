@@ -34,9 +34,9 @@ for($exp=0; $exp<=9; $exp++) {
 		mkdir($outputdir_full);
 	}
 
-	$N_start = 4400;
-	$N_end = 8000;
-	$N_increment = 400;
+	$N_start = 1000; #4400;
+	$N_end = 2000;
+	$N_increment = 200;
 
 	for($N=$N_start; $N<=$N_end; $N+=$N_increment) {
 
@@ -72,8 +72,9 @@ for($exp=0; $exp<=9; $exp++) {
 		`sed -i '' 's/%N/$N/' $outputdir_full/gobnilp$N.set`;
 
                 #works on linux
-				#`sed -i'' 's|%DIR|$outputdir_full|' $outputdir_full/gobnilp$N.set`;  #in-place editing: '' is the SUFFIX in -i[SUFFIX]
-				#`sed -i'' 's/%N/$N/' $outputdir_full/gobnilp$N.set`;
+                #`sed -i'' 's|%DIR|$outputdir_full|' $outputdir_full/gobnilp$N.set`;  #in-place editing: '' is the SUFFIX in -i[SUFFIX]
+		#`sed -i'' 's/%N/$N/' $outputdir_full/gobnilp$N.set`;
+
 		# Run (note, need "gobnilp.set") in same directory
 		print "gobnilp1.3/bin/gobnilp -g$outputdir_full/gobnilp$N.set $model_file > $mec_file";
 		`gobnilp1.3/bin/gobnilp -g$outputdir_full/gobnilp$N.set $model_file > $mec_file`;
