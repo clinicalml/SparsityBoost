@@ -13,136 +13,200 @@ heuristics/rens/freq = -1
 heuristics/rootsoldiving/freq = -1
 heuristics/undercover/freq = -1
 heuristics/veclendiving/freq = -1
-# turn this one on
-heuristics/shiftandpropagate/freq = 1
 
-# turning off some separators
-separating/clique/freq = -1
+# turn off all separators apart from gomory
+separating/closecuts/freq = -1
+separating/cgmip/freq = -1
+separating/cmir/freq = -1
 separating/flowcover/freq = -1
 separating/impliedbounds/freq = -1
 separating/intobj/freq = -1
 separating/mcf/freq = -1
+separating/oddcycle/freq = -1
+separating/rapidlearning/freq = -1
+separating/strongcg/freq = -1
+separating/zerohalf/freq = -1
 
-# row norm to use for efficacy calculation ('e'uclidean, 'm'aximum, 's'um, 'd'iscrete)
-# [type: char, range: {emsd}, default: e]
-separating/efficacynorm = d
-
-# maximal number of consecutive separation rounds without objective or integrality improvement (-1: no additional restriction)
-# [type: int, range: [-1,2147483647], default: 5]
-separating/maxstallrounds = 50
-
-# maximal number of separated cuts at the root node (0: disable root node separation)
-# [type: int, range: [0,2147483647], default: 2000]
-separating/maxcutsroot = 2000000
-
-# separation frequency for the global cut pool (-1: disable global cut pool, 0: only separate pool at the root)
-# [type: int, range: [-1,2147483647], default: 0]
-separating/poolfreq = 1
-
-
-# child selection rule ('d'own, 'u'p, 'p'seudo costs, 'i'nference, 'l'p value, 'r'oot LP value difference, 'h'ybrid inference/root LP value difference)
-# [type: char, range: {dupilrh}, default: h]
-nodeselection/childsel = u
+# frequency for displaying node information lines
+# [type: int, range: [-1,2147483647], default: 100]
+display/freq = 1
 
 # maximal number of restarts (-1: unlimited)
 # [type: int, range: [-1,2147483647], default: -1]
 presolving/maxrestarts = 0
 
+# fraction of integer variables that were fixed in the root node triggering an immediate restart with preprocessing
+# [type: real, range: [0,1], default: 0.2]
+presolving/immrestartfac = 1
+
+# maximum age a cut can reach before it is deleted from the global cut pool, or -1 to keep all cuts
+# [type: int, range: [-1,2147483647], default: 100]
+separating/cutagelimit = -1
+
+# minimal efficacy for a cut to enter the LP
+# [type: real, range: [0,1e+98], default: 0.05]
+separating/minefficacy = 0
+
+# minimal efficacy for a cut to enter the LP in the root node
+# [type: real, range: [0,1e+98], default: 0.01]
+separating/minefficacyroot = 0
+
+# minimal orthogonality for a cut to enter the LP
+# [type: real, range: [0,1], default: 0.5]
+separating/minortho = 0
+
+# minimal orthogonality for a cut to enter the LP in the root node
+# [type: real, range: [0,1], default: 0.5]
+separating/minorthoroot = 0
+
+# maximal number of consecutive separation rounds without objective or integrality improvement (-1: no additional restriction)
+# [type: int, range: [-1,2147483647], default: 5]
+separating/maxstallrounds = -1
+
+# maximal number of separated cuts at the root node (0: disable root node separation)
+# [type: int, range: [0,2147483647], default: 2000]
+separating/maxcutsroot = 200000
+
 # default clock type (1: CPU user seconds, 2: wall clock time)
 # [type: int, range: [1,2], default: 1]
 timing/clocktype = 2
-
-
-#################################
-# DISPLAY
-#################################
-
-# display activation status of display column <depth> (0: off, 1: auto, 2:on)
-# [type: int, range: [0,2], default: 1]
-display/depth/active = 2
-
-# display activation status of display column <vars> (0: off, 1: auto, 2:on)
-# [type: int, range: [0,2], default: 1]
-display/vars/active = 0
-
-# display activation status of display column <poolsize> (0: off, 1: auto, 2:on)
-# [type: int, range: [0,2], default: 1]
-display/poolsize/active = 2
-
-# display activation status of display column <lpavgiterations> (0: off, 1: auto, 2:on)
-# [type: int, range: [0,2], default: 1]
-display/lpavgiterations/active = 0
 
 #################################
 # EXPERIMENTAL
 #################################
 
+#presolving/maxrounds = 0
+
+
+#################################
+# PARAMETERS FOR GOMORY SEPARATOR
+################################
+
+# frequency for calling separator <gomory> (-1: never, 0: only in root node)
+# [type: int, range: [-1,2147483647], default: 0]
+separating/gomory/freq = 1
+
+# should separator be delayed, if other separators found cuts?
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+separating/gomory/delay = TRUE
+
+#########################################
+# PARAMETERS FOR 'DAG CLUSTER' CONSTRAINT
+########################################
+
+# frequency for separating cuts (-1: never, 0: only in root node)
+# [type: int, range: [-1,2147483647], default: 1]
+constraints/dagcluster/sepafreq = 1
+
+# maximum k to try for k-cluster cutting planes
+# [type: int, range: [1,2147483647], default: 1]
+constraints/dagcluster/kmax = 1
+
+# maximum k to try for k-cluster cutting planes in the root
+# [type: int, range: [1,2147483647], default: 1]
+constraints/dagcluster/kmaxroot = 1
+
+
+#########################################
+# PARAMETERS FOR SINK HEURISTIC
+########################################
+
+# frequency for calling primal heuristic <sinks> (-1: never, 0: only at depth freqofs)
+# [type: int, range: [-1,2147483647], default: 1]
+heuristics/sinks/freq = 1
+
+# whether to print *every* BN found by sink heuristic (in SCIP solution format)
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+heuristics/sinks/printsols = FALSE
+
+# where to print solutions found by sink heuristic
+# [type: string, default: ""]
+heuristics/sinks/filesols = ""
+
+#########################################
+# GOBNILP PARAMETERS
+########################################
+
+# file containing constraints on dag structure
+# [type: string, default: ""]
+gobnilp/dagconstraintsfile = ""
+
+# whether to represent empty parent sets implicitly
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/implicitfounders = FALSE
+
+# maximum number of founders (-1 for no upper bound )
+# [type: int, range: [-1,2147483647], default: -1]
+gobnilp/maxfounders = -1
+
+# minimum number of founders
+# [type: int, range: [0,2147483647], default: 0]
+gobnilp/minfounders = 0
+
+# maximum number of edges (-1 for no upper bound )
+# [type: int, range: [-1,2147483647], default: -1]
+gobnilp/maxedges = -1
+
+# minimum number of edges
+# [type: int, range: [0,2147483647], default: 0]
+gobnilp/minedges = 0
+
+# gobnilp to find the 'nbns' best BNs ( in decreasing order of score )
+# [type: int, range: [1,2147483647], default: 1]
+gobnilp/nbns = 1
+
+# whether to disallow immoralities
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/noimmoralities = FALSE
+
+# whether to only allow a covered arc i<-j if i<j
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/orderedcoveredarcs = FALSE
+
+# where the adjacency matrix representation of the BN should be output
+# [type: string, default: ""]
+gobnilp/outputfile/adjacencymatrix = "%DIR/adjacency_matrix%N.txt"
+
+# where the resulting Bayesian network should be output
+# [type: string, default: "stdout"]
+gobnilp/outputfile/solution = "stdout"
+
+# where the dot representation of the BN should be output
+# [type: string, default: ""]
+gobnilp/outputfile/dot = "%DIR/gobnilp_BN.dot"
+
+# where the pedigree representation of the BN should be output
+# [type: string, default: ""]
+gobnilp/outputfile/pedigree = ""
+
+# where the score of and time to find the BN should be output
+# [type: string, default: ""]
+gobnilp/outputfile/scoreandtime = "%DIR/score_and_time%N.txt"
+
+# whether to print edges in the undirected skeleton and any immoralities
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/printmecinfo = TRUE
+
+# whether to print parameters not at default values
+# [type: bool, range: {TRUE,FALSE}, default: TRUE]
+gobnilp/printparameters = TRUE
+
+# whether to (additionally) print BNs in SCIP solution format
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/printscipsol = FALSE
+
 # whether to print solving statistics
 # [type: bool, range: {TRUE,FALSE}, default: FALSE]
-#gobnilp/printstatistics = TRUE
+gobnilp/printstatistics = TRUE
 
-#gobnilp/dagconstraintsfile = "example.constraints"
+# whether to print variable branching statistics
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/printbranchingstatistics = FALSE
 
-#gobnilp/outputfile/cip = "foo.cip"
+# whether to enforce sexual consistency in the dag
+# [type: bool, range: {TRUE,FALSE}, default: FALSE]
+gobnilp/sexconsistent = FALSE
 
-##################################
-# PARAMETERS FOR ACTIVE SEPARATORS
-##################################
-
-# CLOSECUTS
-
-separating/closecuts/freq = 0
-# generate close cuts w.r.t. relative interior point (best solution otherwise)?
-# [type: bool, range: {TRUE,FALSE}, default: TRUE]
-separating/closecuts/separelint = FALSE
-
-# ODDCYCLE
-
-separating/oddcycle/freq = 0
-
-
-# GOMORY
-
-# maximal relative distance from current node's dual bound to primal bound compared to best node's dual bound for applying separator <gomory> (0.0: only on current best node, 1.0: on all nodes)
-# [type: real, range: [0,1], default: 0]
-separating/gomory/maxbounddist = 1
-
-# maximal number of gomory separation rounds per node (-1: unlimited)
-# [type: int, range: [-1,2147483647], default: 5]
-separating/gomory/maxrounds = -1
-
-# maximal number of gomory separation rounds in the root node (-1: unlimited)
-# [type: int, range: [-1,2147483647], default: 10]
-separating/gomory/maxroundsroot = -1
-
-# maximal valid range max(|weights|)/min(|weights|) of row weights
-# [type: real, range: [1,1.79769313486232e+308], default: 10000]
-separating/gomory/maxweightrange = 1.79769313486232e+308
-
-
-# ZEROHALF
-
-# frequency for calling separator <zerohalf> (-1: never, 0: only in root node)
-# [type: int, range: [-1,2147483647], default: -1]
-separating/zerohalf/freq = 0
-
-# maximal number of zerohalf separation rounds per node (-1: unlimited)
-# [type: int, range: [-1,2147483647], default: 5]
-separating/zerohalf/maxrounds = -1
-
-# maximal number of zerohalf separation rounds in the root node (-1: unlimited)
-# [type: int, range: [-1,2147483647], default: 10]
-separating/zerohalf/maxroundsroot = -1
-
-# maximal relative distance from current node's dual bound to primal bound compared to best node's dual bound for applying separator <zerohalf> (0.0: only on current best node, 1.0: on all nodes)
-# [type: real, range: [0,1], default: 0]
-separating/zerohalf/maxbounddist = 1
-
-# maximal number of different deltas to try for cmir (-1: unlimited, 0: delta=1)
-# [type: int, range: [-1,2147483647], default: 10]
-separating/zerohalf/maxtestdelta = -1
-
-# minimal violation of a {0,1/2}-cut to be separated
-# [type: real, range: [0.001,0.5], default: 0.3]
-separating/zerohalf/separating/minviolation = 0.001
-
+# file for statistics
+# [type: string, default: ""]
+gobnilp/statisticsfile = "%DIR/gobnilp_statistics%N.txt"
