@@ -6,7 +6,7 @@ Created on Aug 16, 2012
 
 
 import sys
-sys.path.insert(0, '../src')
+sys.path.insert(0, '../montecarlobeta')
 import unittest
 from scipy import stats
 import emissionProbabilityCalculator as epc

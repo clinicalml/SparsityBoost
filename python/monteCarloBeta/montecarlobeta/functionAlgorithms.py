@@ -11,16 +11,10 @@ default_valueTolerance = 1e-200
 
 
 import logging
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 import os
 homeDirectory = os.getenv("HOME", "/Users/eliotpbrenner")
-logger = logging.getLogger('myapp')
 
-hdlr = logging.FileHandler(homeDirectory + '/logs/monteCarloBeta.log')
-formatter = logging.Formatter("%(asctime)s [%(funcName)s: %(filename)s,%(lineno)d] %(message)s")
-#formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-hdlr.setFormatter(formatter)
-logger.addHandler(hdlr) 
-logger.setLevel(logging.CRITICAL)
 
 class functionAlgorithms(object):
     '''
@@ -47,7 +41,7 @@ class functionAlgorithms(object):
         the function takes the value (or returns the upper or lower bound of the interval if)
         the function value is outside the interval and above/below it, resp.
         '''
-        #logger.debug("Searching for theValue %s between %s and %s"%(theValue, lowerBound, upperBound))
+        #logging.debug("Searching for theValue %s between %s and %s"%(theValue, lowerBound, upperBound))
         if np.abs(upperBound - lowerBound) < self.intervalTolerance:
             return lowerBound
         if theValue < self.theFunction(lowerBound) + self.valueTolerance:
@@ -59,10 +53,10 @@ class functionAlgorithms(object):
         if np.abs(midpointValue - theValue) < self.valueTolerance:
             return midpoint
         if midpointValue < theValue:
-            #logger.debug("With midpointvalue=%s < theValue=%s, resetting lower bound to midpoint=%s"%(midpointValue, theValue, midpoint))
+            #logging.debug("With midpointvalue=%s < theValue=%s, resetting lower bound to midpoint=%s"%(midpointValue, theValue, midpoint))
             return self.searchArgWhereIncreasingFunctionTakesVal(theValue, midpoint, upperBound)
         else:
-            #logger.debug("With midpointvalue=%s > theValue=%s, resetting upper bound to midpoint=%s"%(midpointValue, theValue, midpoint))
+            #logging.debug("With midpointvalue=%s > theValue=%s, resetting upper bound to midpoint=%s"%(midpointValue, theValue, midpoint))
             return self.searchArgWhereIncreasingFunctionTakesVal(theValue, lowerBound, midpoint)
          
     def searchArgWhereIncreasingFunctionTakesProportionOfMaxVal(self, theProportion, lowerBound, upperBound):
@@ -70,7 +64,7 @@ class functionAlgorithms(object):
         [Binary] search within [lowerBound, upperBound] for the argument where the function takes the value
                 f(found argument) = theProportion*(f(upperBound))
         '''
-        logger.debug("Searching for value of theProportion*self.theFunction(upperBound)=%s between lowerBound=%s and upperBound=%s"%(theProportion*self.theFunction(upperBound), 
+        logging.debug("Searching for value of theProportion*self.theFunction(upperBound)=%s between lowerBound=%s and upperBound=%s"%(theProportion*self.theFunction(upperBound), 
                                                              lowerBound, upperBound))
         return self.searchArgWhereIncreasingFunctionTakesVal(theProportion*self.theFunction(upperBound), 
                                                              lowerBound, upperBound)
@@ -83,5 +77,5 @@ class functionAlgorithms(object):
         '''
         allArguments = [argument for argument in self.fixedArgumentList]
         allArguments.append(varyingArgument)
-        #logger.debug("All arguments=%s"%(str(allArguments)))
+        #logging.debug("All arguments=%s"%(str(allArguments)))
         return self.theFunction(*allArguments)
