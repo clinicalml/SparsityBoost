@@ -56,7 +56,7 @@ gobnilp1.3/bin/gobnilp ../results/experiments/0/sparsity_eps005/model4400.mod > 
 
 The script perl/run_experiments.pl reproduces the experiments in the UAI paper. 
 
-In order to run perl/run_experiments.pl you have to have 
+In order to run perl/run_experiments.pl you have to have  
 
 gobnilp1.3/bin/gobnilp
 
