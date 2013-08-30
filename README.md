@@ -28,8 +28,11 @@ are for computing the values of beta needed for the interpolation.  We recommend
 In this case, the user only needs to run the C/C++ parts of the library.  A typical invocation of the main method, ../c/bscore, looks like this:
 
 ../c/bscore -bic -nodes 37 -maxpa 4 -data ../data/synthetic_examples/experiments/0/alarm4400.dat -mod_out ../results/experiments/0/sparsity_eps005/model4400.mod -edge_scores .005
- gobnilp1.3/bin/gobnilp -g../results/experiments/0/sparsity_eps005/gobnilp4400.set ../results/experiments/0/sparsity_eps005/model4400.mod > ../results/experiments/0/sparsity_eps005/output4400.txt
 
+Here, the .dat file consists of raw data.  Each row holds one observation, which is a series of 0s and 1s separated by spaces, one 0 or 1 for each variable in the system.
+The .mod file is a 
+
+ gobnilp1.3/bin/gobnilp -g../results/experiments/0/sparsity_eps005/gobnilp4400.set ../results/experiments/0/sparsity_eps005/model4400.mod > ../results/experiments/0/sparsity_eps005/output4400.txt
 
 Dependencies:
 =============

@@ -33,6 +33,8 @@ benchMarkInterval_N = 100 #the kth line in the benchmark file contains results f
 class IntegrateWithStoppingCriterionTest(unittest.TestCase):
 
 
+
+
     def _testIntegratetoFlatFile(self):        
         #load in benchmark data
         benchmarks = genfromtxt('cdf_for_valsets_of_variables_of_size2and2', delimiter=',', skip_header=4)
@@ -146,9 +148,9 @@ class IntegrateWithStoppingCriterionTest(unittest.TestCase):
                     writer.writerow(rowList)
         f.close()
 
+:
 
-
-    def testIntegratetoPickle(self):      
+    def _testIntegratetoPickle(self):      
         #load in benchmark data
         benchmarks = genfromtxt('cdf_for_valsets_of_variables_of_size2and2', delimiter=',', skip_header=5)
         benchmarks_without_stepsize = benchmarks[:,1:]
@@ -236,6 +238,8 @@ class IntegrateWithStoppingCriterionTest(unittest.TestCase):
                     dictionaryFromNameOfMethodToResults[nameOfMethod] = resultsDictionary
                     fileNameForPickleDump = "testRun" + str(N)
                     pickle.dump( dictionaryFromNameOfMethodToResults, open( fileNameForPickleDump, "wb" ) )
+
+
 
 if __name__ == "__main__":
     unittest.main()
