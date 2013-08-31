@@ -76,9 +76,9 @@ data/synthetic_examples/experiments/9/alarm6600.dat
 
 so that if you untar it directly in the toplevel ("SparsityBoost") folder of the project, the paths will be what the run_experiments.pl script expects. 
 
-Computing the CDF of the Mutual Information ("beta")
+Computing the CDF of the MI ("beta")
 ====================================================
-The reason for doing this is if you wish to learn a network assuming a minimal edge strength ("epsilon") other than the four values cited above.  Use the class betaTable.py in MonteCarlo/montecarlo/.  Instructions to follow.
+The reason for computing your own InterpolationData files is if you wish to learn a network assuming a minimal edge strength ("epsilon") other than the four values cited above.  Use the class betaTable.py in MonteCarlo/montecarlo/.  Detailed instructions to follow.
 
 
 Dependencies:
