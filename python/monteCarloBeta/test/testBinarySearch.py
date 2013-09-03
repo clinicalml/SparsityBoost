@@ -18,7 +18,13 @@ import math
 import unittest
 import binarySearch as bS
 import logging
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
+logging.basicConfig(format='%(levelname)s:%(filename)s:%(message)s', level=logging.INFO)
+
+logging.basicConfig(
+    filename = fileName,
+    format = "%(levelname) -10s %(asctime)s %(module)s:%(lineno)s %(funcName)s %(message)s",
+    level = logging.DEBUG
+)
 
 class testBinarySearch(unittest.TestCase):
         

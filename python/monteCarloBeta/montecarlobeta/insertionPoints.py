@@ -24,7 +24,7 @@ def find_le(a, x):
     'Find rightmost value less than or equal to x'
     i = bisect.bisect_right(a, x)
     if i:
-        return a[i-1],i
+        return a[i-1], i
     raise ValueError
 
 def find_le_withBounds(a,x,lo,hi):

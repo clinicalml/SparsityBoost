@@ -10,6 +10,8 @@ of integrands, with stopping criterion based on the formula (4.6) of Bucklew's b
 
 import logging
 # create logger
+logging.basicConfig(format='%(levelname)s:%(filename)s: %(message)s', level=logging.INFO)
+
 
 from scipy import stats
 def IntegrateWithStoppingCriterion(k,l,
@@ -30,6 +32,7 @@ def IntegrateWithStoppingCriterion(k,l,
      frequencyOfApplicationOfStoppingCriterion: test every this-number-of-trials to see if the stopping criterion is actually satisfied. 
     """
     logger = logging.getLogger('mc_application')
+
     logger.debug('Entering a call to IntegrateWithStoppingCriterion')
     
     #Calculate t_y from y=desiredConfidence
